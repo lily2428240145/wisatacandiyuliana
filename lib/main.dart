@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:wisata_candi/screens/detail_screen.dart';
 import 'package:wisata_candi/data/candi_data.dart';
+import 'providers/favorite_provider.dart';
+import 'providers/auth_provider.dart';
+
 
 void main() => runApp(const MyApp());
 
