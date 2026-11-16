@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:wisata_candi/models/candi.dart';
+import 'package:wisata_candi/providers/favorite_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class DetailScreen extends StatelessWidget {
@@ -13,6 +15,9 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final favoriteProvider = context.watch<FavoriteProvider>();
+    final isFavorite = favoriteProvider.isFavorite(candi.name);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -67,6 +72,7 @@ class DetailScreen extends StatelessWidget {
                 children: [
                   const SizedBox(height: 16),
 
+                  // Nama dan Favorit
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -81,13 +87,16 @@ class DetailScreen extends StatelessWidget {
                       ),
                       IconButton(
                         onPressed: () {
-                          candi.isFavorite = !candi.isFavorite;
+                          context
+                              .read<FavoriteProvider>()
+                              .toggle(candi.name);
                         },
                         icon: Icon(
-                          candi.isFavorite
+                          isFavorite
                               ? Icons.favorite
                               : Icons.favorite_border,
-                          color: Colors.red,
+                          color: isFavorite ? Colors.red : Colors.grey,
+                          size: 28,
                         ),
                       ),
                     ],
@@ -95,6 +104,7 @@ class DetailScreen extends StatelessWidget {
 
                   const SizedBox(height: 16),
 
+                  // Lokasi
                   Row(
                     children: [
                       const Icon(Icons.place, color: Colors.red),
@@ -103,13 +113,16 @@ class DetailScreen extends StatelessWidget {
                         width: 70,
                         child: Text(
                           'Lokasi',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       Expanded(child: Text(': ${candi.location}')),
                     ],
                   ),
 
+                  // Tahun pembangunan
                   Row(
                     children: [
                       const Icon(
@@ -121,13 +134,16 @@ class DetailScreen extends StatelessWidget {
                         width: 70,
                         child: Text(
                           'Dibangun',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       Expanded(child: Text(': ${candi.built}')),
                     ],
                   ),
 
+                  // Tipe
                   Row(
                     children: [
                       const Icon(Icons.house, color: Colors.green),
@@ -136,7 +152,9 @@ class DetailScreen extends StatelessWidget {
                         width: 70,
                         child: Text(
                           'Tipe',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       Expanded(child: Text(': ${candi.type}')),

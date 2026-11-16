@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wisata_candi/providers/auth_provider.dart';
 import 'package:wisata_candi/screens/profile_screen.dart';
+import 'package:wisata_candi/screens/sign_up_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -71,7 +72,6 @@ class _SignInScreenState extends State<SignInScreen> {
             child: Form(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   TextFormField(
                     controller: _usernameController,
@@ -80,7 +80,9 @@ class _SignInScreenState extends State<SignInScreen> {
                       border: OutlineInputBorder(),
                     ),
                   ),
+
                   const SizedBox(height: 20),
+
                   TextFormField(
                     controller: _passwordController,
                     decoration: InputDecoration(
@@ -102,12 +104,16 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     obscureText: _obscurePassword,
                   ),
+
                   const SizedBox(height: 20),
+
                   ElevatedButton(
                     onPressed: _signIn,
                     child: const Text('Sign In'),
                   ),
+
                   const SizedBox(height: 10),
+
                   RichText(
                     text: TextSpan(
                       text: 'Belum punya akun? ',
@@ -124,11 +130,11 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    'Halaman pendaftaran belum tersedia.',
-                                  ),
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const SignUpScreen(),
                                 ),
                               );
                             },
