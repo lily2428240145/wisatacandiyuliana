@@ -1,7 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wisata_candi/screens/profile_screen.dart';
+
+import 'package:wisata_candi/screens/home_screen.dart';
 import 'package:wisata_candi/providers/favorite_provider.dart';
 import 'package:wisata_candi/providers/auth_provider.dart';
 
@@ -33,7 +34,9 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          iconTheme: IconThemeData(color: Colors.deepPurple),
+          iconTheme: IconThemeData(
+            color: Colors.deepPurple,
+          ),
           titleTextStyle: TextStyle(
             color: Colors.deepPurple,
             fontSize: 20,
@@ -48,7 +51,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const ProfileScreen(),
+      home: const HomeScreen(),
     );
   }
 }
